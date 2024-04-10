@@ -3,11 +3,11 @@ Aum Garasia
   2. Worked on parsing and data structures that could be used.
 
 Samit Shah
-  1. Created the grammar for conditionals and Loops.
+  1. Created the grammar for conditionals and comments.
   2. Worked on language design of the same.
 
 Shubham Shah
-  1. Created the grammar for comments and arithmetic expressions.
+  1. Created the grammar for Loops and arithmetic expressions.
   2. Worked on language design of the same.
 
 Siddesh Shetty
