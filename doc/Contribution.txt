@@ -1,0 +1,15 @@
+Aum Garasia
+  1. Created the grammar for the strings and declarations.
+  2. Worked on parsing and data structures that could be used.
+
+Samit Shah
+  1. Created the grammar for conditionals and Loops.
+  2. Worked on language design of the same.
+
+Shubham Shah
+  1. Created the grammar for comments and arithmetic expressions.
+  2. Worked on language design of the same.
+
+Siddesh Shetty
+  1. Created the grammar for boolean and print statements.
+  2. Worked on language design of the same and that of strings.
