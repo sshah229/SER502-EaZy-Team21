@@ -1,6 +1,8 @@
 Aum Garasia
   1. Created the grammar for the strings and declarations.
   2. Worked on parsing and data structures that could be used.
+  3. Added code to test the tokenizer and evaluator.
+  4. Added code to read and return the number of nodes and leaves of the parse tree.
 
 Samit Shah
   1. Created the grammar for conditionals and comments.
