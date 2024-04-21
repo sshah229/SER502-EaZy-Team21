@@ -42,4 +42,56 @@ class Evaluator:
         return node, leaves
     
     def evaluate(self, T):
-        # TODO write evaluator for different functionalities of the grammar
+        node, leaves = self.readTree(T)
+        
+        # If-else:
+        if node == 'if-else':
+            if self.evaluate(leaves[0]):
+                self.evaluate(leaves[1])
+            else:
+                self.evaluate(leaves[2])
+        
+        # For-loop:
+        elif node == "for_T":
+            self.evaluate(leaves[0])
+            while(self.evaluate(leaves[1])):
+                self.evaluate(leaves[2])
+                self.evaluate(leaves[3])
+        elif node == 'for_Range':
+            iterator = self.env[leaves[0]]
+            iterator['val'] = self.evaluate(leaves[1])
+            stopVal = self.evaluate(leaves[2])
+            while iterator['val'] <= stopVal:
+                self.evaluate(leaves[3])
+                iterator['val'] += 1
+        
+        # Function call:
+        elif node == 'no_func':
+            pass
+        elif node == 'List_of_func':
+            self.evaluate(leaves[0])
+            self.evaluate(leaves[1])
+        elif node == 'function':
+            self.defineFunc(leaves)
+        elif node == 'call':
+            #print('call', leaves)
+            functionEvaluator = Evaluator()
+            function = self.functions[leaves[0]]
+            args = []
+            functionEvaluator.functions = self.functions
+
+            if len(function['parameters']):
+                self.parseArguments(leaves[1], args)
+                for i in range(len(args)):
+                    functionEvaluator.setEnv(function['parameters'][i][1], function['parameters'][i][0], args[i])
+            functionEvaluator.evaluate(function['tree'])
+            return functionEvaluator.returnValue
+        elif node == 'return':
+            self.returnValue = self.evaluate(leaves[0])
+            
+        # Program:
+        elif node == "Program":
+            self.evaluate(leaves[0])
+            self.evaluate(leaves[1])
+
+        return 0
