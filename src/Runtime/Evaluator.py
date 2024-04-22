@@ -43,9 +43,51 @@ class Evaluator:
     
     def evaluate(self, T):
         node, leaves = self.readTree(T)
+
+        # Numbers:
+        if node == 'int':
+            val = int(leaves[0])
+            return val
         
+        # Strings:
+        if node == 'str':
+            return leaves[0]
+        
+        # Boolean:
+        if node == 'bool':
+            return leaves[0] == 'Sahi'
+        
+        # Identifiers:
+        elif node == 'id':
+            # TODO: init error
+            return self.env[leaves[0]]['val']
+        
+        # Arithmetic Expressions:
+        elif node == 'add':
+            return self.evaluate(leaves[0]) + self.evaluate(leaves[1])
+        elif node == 'subtract':
+            return self.evaluate(leaves[0]) - self.evaluate(leaves[1])
+        elif node == 'multiply':
+            return self.evaluate(leaves[0]) * self.evaluate(leaves[1])
+        elif node == 'divide':
+            return int(self.evaluate(leaves[0]) / self.evaluate(leaves[1]))
+        elif node == 'modulo':
+            return self.evaluate(leaves[0]) % self.evaluate(leaves[1])
+
+        # Boolean Expressions:
+        elif node == 'OR':
+            return self.evaluate(leaves[0]) or self.evaluate(leaves[1])
+        elif node == 'AND':
+            return self.evaluate(leaves[0]) and self.evaluate(leaves[1])
+        elif node == 'equals':
+            return self.evaluate(leaves[0]) == self.evaluate(leaves[1])
+        elif node == 'NOT':
+            return not self.evaluate(leaves[0])
+        
+        # TODO : evaluators for statement-list, assignment.
+
         # If-else:
-        if node == 'if-else':
+        elif node == 'if-else':
             if self.evaluate(leaves[0]):
                 self.evaluate(leaves[1])
             else:
@@ -95,3 +137,34 @@ class Evaluator:
             self.evaluate(leaves[1])
 
         return 0
+    
+    def parseParameters(self, Tree, Accumulator):
+        node, leaves = self.readTree(Tree)
+        if node == 'nonePmt':
+            return
+        elif node == 'pmt':
+            Accumulator.append(leaves)  # ['int', 'a']
+        elif node == 'pmtList':
+            self.parseParameters(leaves[0], Accumulator)
+            self.parseParameters(leaves[1], Accumulator)
+
+    def parseArguments(self, Tree, Accumulator):
+        node, leaves = self.readTree(Tree)
+        if node == 'noneArg':
+            return
+        elif node == 'argList':
+            self.parseArguments(leaves[0], Accumulator)
+            self.parseArguments(leaves[1], Accumulator)
+        else:
+            Accumulator.append(self.evaluate(Tree))
+    
+if __name__ == '__main__':
+    eval = Evaluator()
+    eval.env['x'] = {'type': 'int', 'val': 5}
+    s = 'stmt_list(dec(int, id(x)), stmt_list(assign(id(y), add(2, 5)), display(id(y))))'
+    s2 = 'forT( assign(id(x), 0), compareLesser(id(x), 10), assign(id(x), add(id(x), 1)), stmt_list( display(id(x)), display(id(y)) ) )'
+    s3 = 'id(x)'
+    s4 = 'num(6)'
+    acc = []
+    eval.parseArguments('argList(id(x), num(pos, 6))', acc)
+    print(acc)
