@@ -3,6 +3,8 @@ Aum Garasia
   2. Worked on parsing and data structures that could be used.
   3. Added code to test the tokenizer and evaluator.
   4. Added code to read and return the number of nodes and leaves of the parse tree.
+  5. Added code to evaluate Arithmetic and boolean expressions, function parameters and arguements.
+  6. Added boilerplate code to test the evaluator.
 
 Samit Shah
   1. Created the grammar for conditionals and comments.
