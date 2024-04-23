@@ -175,6 +175,10 @@ stmt_block(forR(T1,T2,T3,T4)) --> ['for-loop', '('],
     id_name(T1), ['in', 'range', '('], expr(T2), [','], expr(T3), [')', ')', '{'],
     stmt_list(T4), ['}'].
 
+% while-loop
+stmt_block(while(T1,T2)) --> ['while', '('], bool_expr(T1), [')', '{'],
+    stmt_list(T2), ['}'].
+
 % FUNCTIONS
 func_list(noneFunc()) --> [].
 func_list(func(T1,T2,T3)) --> ['func'], id_name(T1), 
