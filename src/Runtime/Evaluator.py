@@ -86,6 +86,17 @@ class Evaluator:
         
         # TODO : evaluators for statement-list, assignment.
 
+        elif node == 'assign':
+            self.env[leaves[0]]['val'] = self.evaluate(leaves[1])
+        elif node == 'addAssign':
+            self.env[leaves[0]]['val'] += self.evaluate(leaves[1])
+        elif node == 'subAssign':
+            self.env[leaves[0]]['val'] -= self.evaluate(leaves[1])
+        elif node == 'mulAssign':
+            self.env[leaves[0]]['val'] *= self.evaluate(leaves[1])
+        elif node == 'divAssign':
+            self.env[leaves[0]]['val'] /= self.evaluate(leaves[1])
+
         # If-else:
         elif node == 'if-else':
             if self.evaluate(leaves[0]):
@@ -107,6 +118,9 @@ class Evaluator:
                 self.evaluate(leaves[3])
                 iterator['val'] += 1
         
+        elif node == 'display':
+            print(self.evaluate(leaves[0]))
+
         # Function call:
         elif node == 'no_func':
             pass
@@ -162,9 +176,11 @@ if __name__ == '__main__':
     eval = Evaluator()
     eval.env['x'] = {'type': 'int', 'val': 5}
     s = 'stmt_list(dec(int, id(x)), stmt_list(assign(id(y), add(2, 5)), display(id(y))))'
-    s2 = 'forT( assign(id(x), 0), compareLesser(id(x), 10), assign(id(x), add(id(x), 1)), stmt_list( display(id(x)), display(id(y)) ) )'
-    s3 = 'id(x)'
-    s4 = 'num(6)'
+    s1 = 'forT( assign(id(x), 0), compareLesser(id(x), 10), assign(id(x), add(id(x), 1)), stmt_list( display(id(x)), display(id(y)) ) )'
+    s2 = 'id(x)'
+    s3 = 'num(6)'
+    s4 = 'display(id(y))'
+    
     acc = []
     eval.parseArguments('argList(id(x), num(pos, 6))', acc)
     print(acc)
