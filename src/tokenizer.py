@@ -1,105 +1,45 @@
-import re
+class Tokenizer:
 
-def tokenize(code):
-    keywords = set(['keyword', 'spec_char', 'datatype', 'boolean'])
-    tokens = re.findall(r'\b\w+\b|\'(?:[^\'\\]|\\.)*\'|"(?:[^"\\]|\\.)*"', code)
-    tokens = [token.strip("'\"") for token in tokens]
-    tokenized = []
-    for token in tokens:
-        try:
-            if token in keywords:
-                tokenized.append(('KEYWORD', token))
-            elif token.startswith('num'):
-                tokenized.append(('NUM', token.split('(')[1].strip(')')))
-            elif token.startswith('str'):
-                tokenized.append(('STRING', token.split('(')[1].strip(')')))
-            elif token.startswith('id'):
-                tokenized.append(('ID', token.split('(')[1].strip(')')))
-            elif token.startswith('bool'):
-                tokenized.append(('BOOL', token.split('(')[1].strip(')')))
-            elif token.startswith('\'') or token.startswith('"'):
-                tokenized.append(('STRING', token))
-            elif token.startswith('('):
-                tokenized.append(('LPAREN', token))
-            elif token.startswith(')'):
-                tokenized.append(('RPAREN', token))
-            elif token.startswith('{'):
-                tokenized.append(('LBRACE', token))
-            elif token.startswith('}'):
-                tokenized.append(('RBRACE', token))
-            elif token == ';':
-                tokenized.append(('SEMICOLON', token))
-            elif token in ['+', '-', '*', '/', '%', '==', '<', '>', '<=', '>=', '=']:
-                tokenized.append(('OPERATOR', token))
-            elif token in ['and', 'or', 'not', 'if', 'else', 'for-loop', 'in', 'range', 'display', 'return', 'sup', 'peaceout']:
-                tokenized.append(('KEYWORD', token))
-            elif token.startswith('#'):
-                tokenized.append(('COMMENT', token))
-            else:
-                tokenized.append(('UNKNOWN', token))
-        except IndexError as e:
-            print(f"Error: {e} - Token: {token}")
-    return tokenized
+    def __init__(self) -> None:
 
-# Sample code input
-code = '''
-keyword('sup').
-keyword('peaceout').
-keyword('int').
-keyword('str').
-keyword('bool').
-keyword('True').
-keyword('False').
-keyword('for-loop').
-keyword('in').
-keyword('range').
-keyword('if').
-keyword('else').
-keyword('display').
-keyword('return').
+        self.keywords = set(['sup', 'peaceout', 'int', 'str', 'bool', 'True', 'False', 'for-loop', 'in', 'range', 'if', 'else', 'display', 'return'])
 
-spec_char('!').
-spec_char('\\').
-spec_char('#').
-spec_char('$').
-spec_char('&').
-spec_char('(').
-spec_char(')').
-spec_char('*').
-spec_char('+').
-spec_char(',').
-spec_char('-').
-spec_char('.').
-spec_char('/').
-spec_char(':').
-spec_char(';').
-spec_char('<').
-spec_char('=').
-spec_char('>').
-spec_char('?').
-spec_char('@').
-spec_char('~').
-spec_char('%').
-spec_char('^').
+        self.comp = set(['+=', '-=', '*=', '/=', '>=', '==', '<='])
+        self.op = set(['+', '-', '*', '/', '%', '<', '>', '='])
+        self.dl = set([';', '(', ')', '{', '}', ',', '?', ':'])
 
-datatype('int').
-datatype('str').
-datatype('bool').
+    def tokenizer1(self,text):
+        #print('TEXT:', text)
+        text=text.strip()
+        tokens = []
 
-boolean('Sahi').
-boolean('Galat').
+        if not len(text):
+            return []
+        
+        # KEYWORD
+        if text in self.keywords:
+            return [text]
 
-%:-use_rendering(svgtree).
-:-table expr/3, expr2/3, expr3/3, bool_expr/3, bool_expr2/3.
+        # for-loop
+        if text.startswith('for-loop'):
+            return ['for-loop'] + self.tokenizer1(text[len('for-loop'):])
+        
+        # string
+        if text[0]=='"':
+            i=1
+            while(i<len(text)):
+                if text[i] == '"':
+                    tokens.append(text[0]) # "
+                    tokens.append(text[1:i]) # string
+                    tokens.append(text[i]) # "
+                    return tokens + self.tokenizer1(text[i+1:])  
+                i+=1
 
-% numbers
-num(num(pos,N1)) --> [N], {atom_number(N, N1)}.
-num(num(neg,N1)) --> ['-'], [N], {atom_number(N, N1)}.
-num(num(pos,N1)) --> ['+'], [N], {atom_number(N, N1)}.
+    def tokenizeProgram(self, program):
+        tokens = []
+        for line in program.split('\n'):
+            tokens += self.tokenizer1(line)
+        return tokens
 
-...
-'''
-
-tokens = tokenize(code)
-for token in tokens:
-    print(token)
+if __name__ == "__main__":
+    Tk = Tokenizer()
