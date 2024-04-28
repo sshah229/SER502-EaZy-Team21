@@ -84,6 +84,7 @@ expr(T) --> expr2(T).
 expr2(t_mul(T1,T2)) --> expr2(T1), ['*'], expr3(T2).
 expr2(t_div(T1,T2)) --> expr2(T1), ['/'], expr3(T2).
 expr2(t_mod(T1,T2)) --> expr2(T1), ['%'], expr3(T2).
+expr2(t_pow(T1,T2)) --> expr2(T1), ['^'], expr3(T2).
 expr2(T) --> expr3(T).
 
 expr3(T) --> num(T).
