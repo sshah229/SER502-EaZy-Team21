@@ -7,11 +7,11 @@ from tokenizer import tokenise
 
 
 class Testing(unittest.TestCase):
-    testCase_1 = "str SS;\nbool SER502 = False;\nint Group = 6 + 3 * 5;\nx = \"SSSA\";"
-    expected_1 = ['str', 'SS', ';', 'bool', 'SER502', '=', 'False', ';', 'int', 'Group', '=', '6', '+', '3', '*', '5', ';', 'x', '=', '"', 'SSSA', '"', ';']
+    testCase_1 = "str SS;\nbool SER502 = Galat;\nint Group = 6 + 3 * 5;\nx = \"SSSA\";"
+    expected_1 = ['str', 'SS', ';', 'bool', 'SER502', '=', 'Galat', ';', 'int', 'Group', '=', '6', '+', '3', '*', '5', ';', 'x', '=', '"', 'SSSA', '"', ';']
 
-    testCase_2 = "y = not y;\nbool X = True or False;"
-    expected_2 = ['y', '=', 'not', 'y', ';', 'bool', 'X', '=', 'True', 'or', 'False', ';']
+    testCase_2 = "y = not y;\nbool X = Sahi or Galat;"
+    expected_2 = ['y', '=', 'not', 'y', ';', 'bool', 'X', '=', 'Sahi', 'or', 'Galat', ';']
 
     testCase_3 = "int A = x+y+z/4;"
     expected_3 = ['int', 'a', '=', 'x', '+', 'y' , '+', 'z', '/', '4', ';']
