@@ -1,20 +1,17 @@
-import os, sys
 from pyswip import Prolog
 
-sys.path.insert(0, os.getcwd() + '/src/compiler')
-
-from tokenizer import Tokenizer         # These files are assumed to be made at this point
-from evaluator import Evaluator
+from Tokenizer import Tokenizer         # These files are assumed to be made at this point
+from Evaluator import Evaluator
 
 if __name__=='__main__':
-     file = open("data/sample.ez", "r")
+     file = open("sample.ez", "r")
      program =  file.read()
      
      Tk = Tokenizer()
      tokens = Tk.tokenizeProgram(program)
      
      prolog = Prolog()
-     prolog.consult('src/compiler/parser.pl') 
+     prolog.consult('parser.pl') 
      query = "program(T, " + str(tokens) + ", [])."
      # print(query)
      #parseTree = ''

@@ -84,7 +84,21 @@ class Evaluator:
         elif node == 'NOT':
             return not self.evaluate(leaves[0])
         
-        # TODO : evaluators for statement-list, assignment.
+        # STATEMENTS
+        elif node == 'stmt_list':
+            self.evaluate(leaves[0])
+            self.evaluate(leaves[1])
+        
+        # declaration
+        elif node == 'dec':
+            # TODO: multiple initialization errors
+            self.setEnv(leaves[1], leaves[0], self.defaultValues[leaves[0]])
+        elif node == 'decAssign':
+            # TODO: multiple initialization errors
+            self.setEnv(leaves[1], leaves[0], self.evaluate(leaves[2]))
+
+        elif node == 'display':
+            print(self.evaluate(leaves[0]))
 
         elif node == 'assign':
             self.env[leaves[0]]['val'] = self.evaluate(leaves[1])
