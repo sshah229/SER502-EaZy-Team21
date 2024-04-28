@@ -19,7 +19,7 @@ class Evaluator:
         i = start
         while i < len(T):
             if T[i] == '(':
-                node = tree[:i].strip()
+                node = T[:i].strip()
                 start = i+1
                 break
             i += 1
