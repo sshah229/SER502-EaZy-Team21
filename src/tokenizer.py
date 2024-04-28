@@ -36,10 +36,10 @@ class Tokenizer:
                 i+=1
 
         # Comments
-        if text.startswith('@'):
+        if text.startswith('@@'):
             i=2
             while i<len(text):
-                if text[i]=='$' and text[i-1]=='$':
+                if text[i]=='@' and text[i-1]=='@':
                     return self.tokenize(text[i+1:])
                 i+=1
 
@@ -90,8 +90,8 @@ if __name__ == "__main__":
         print(Tk.tokenize(ternary)==['x', '==', '12', '?', 'display', 
                                        'eZ', ':', 's', '=', '12'])
         
-        comment = '@ This is a Comment @'
-        print(Tk.tokenize(comment)==['@', 'This', 'is', 'a', 'Comment', '@'])
+        comment = '@@ This is a Comment @@'
+        print(Tk.tokenize(comment)==[])
 
         if_else = 'if (x + 1 == 3) { display "this is EZ"; }'
         print(Tk.tokenize(if_else)==['if', '(', 'x', '+', '1', '==', '3', ')', '{', 'display', 

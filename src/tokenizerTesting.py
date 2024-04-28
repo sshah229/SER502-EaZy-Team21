@@ -1,9 +1,8 @@
 import unittest
-from unittest import result
 import os, sys
 
 sys.path.insert(0, os.getcwd() + '/src/')
-from tokenizer import tokenise
+from tokenizer import Tokenizer
 
 
 class Testing(unittest.TestCase):
@@ -20,19 +19,19 @@ class Testing(unittest.TestCase):
     expected_4 = ['sup', 'int', 'N', ';','str', 'SASS', ';']
 
     def test1(self):
-        result = tokenise(Testing.testCase_1)
+        result = Tokenizer(Testing.testCase_1)
         self.assertEqual(result, Testing.expected_1)
     
     def test2(self):
-        result = tokenise(Testing.testCase_2)
+        result = Tokenizer(Testing.testCase_2)
         self.assertEqual(result, Testing.expected_2)
 
     def test3(self):
-        result = tokenise(Testing.testCase_3)
+        result = Tokenizer(Testing.testCase_3)
         self.assertEqual(result, Testing.expected_3)
     
     def test4(self):
-        result = tokenise(Testing.testCase_4)
+        result = Tokenizer(Testing.testCase_4)
         self. assertEqual(result, Testing.expected_4)
 
 if __name__ == '__main__':
