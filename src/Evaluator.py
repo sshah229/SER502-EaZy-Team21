@@ -11,6 +11,7 @@ class Evaluator:
     def setEnv(self, id, type, val):
         self.env[id] = {'Type': type, 'Val': val}
 
+    # Reading the parse tree
     def readTree(self, T):
         T = T.strip()
         leaves = []
