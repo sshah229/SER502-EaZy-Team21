@@ -100,8 +100,8 @@ bool_expr2(T) --> bool_expr3(T).
 
 % equality (boolean)
 bool_expr3(equals(T1,T2)) -->  bool_expr(T1), ['=='], bool_expr(T2).
-bool_expr3(equals(T1,T2)) --> expr(T1), ['=='], expr(T2).
-bool_expr3(equals(T1,T2)) --> id(T1), ['=='], value(T2).
+bool_expr3(equals(T1,T2)) -->  expr(T1), ['=='], expr(T2).
+bool_expr3(equals(T1,T2)) -->  id(T1), ['=='], value(T2).
 
 % arithmetic comparison (boolean)
 bool_expr3(lt(T1,T2)) --> expr(T1), ['<'], expr(T2).
@@ -116,6 +116,7 @@ bool_expr3(T) --> id(T).
 bool(bool(T)) --> [T], {boolean(T)}.
 
 % statements
+stmt_list(T) --> stmt(T).
 stmt_list(T) --> stmt(T), [';'].
 stmt_list(T) --> stmt_block(T).
 stmt_list(stmt_list(T1,T2)) --> stmt(T1), [';'], stmt_list(T2).
@@ -175,6 +176,10 @@ stmt_block(forR(T1,T2,T3,T4)) --> ['for-loop', '('],
     id_name(T1), ['in', 'range', '('], expr(T2), [','], expr(T3), [')', ')', '{'],
     stmt_list(T4), ['}'].
 
+% while-loop
+stmt_block(while(T1,T2)) --> ['while', '('], bool_expr(T1), [')', '{'],
+    stmt_list(T2), ['}'].
+
 % FUNCTIONS
 func_list(noneFunc()) --> [].
 func_list(func(T1,T2,T3)) --> ['func'], id_name(T1), 
@@ -192,3 +197,88 @@ parameter_list(pmtList(pmt(T1,T2),T3)) --> [T1], id_name(T2), {datatype(T1)}, ['
 
 % program
 program(prog(T1,T2)) --> func_list(T1), ['sup'], stmt_list(T2), ['peaceout'].
+
+% Arithmetic test cases
+test_arithmetic1 :-
+    phrase(expr(ArithmeticExpr), ['10', '+', '5']),
+    writeln('Arithmetic Expression-1:'),
+    writeln(ArithmeticExpr).
+
+test_arithmetic2 :-
+    phrase(expr(ArithmeticExpr), ['15', '-', '7']),
+    writeln('Arithmetic Expression-2:'),
+    writeln(ArithmeticExpr).
+
+test_arithmetic3 :-
+    phrase(expr(ArithmeticExpr), ['4', '*', '3']),
+    writeln('Arithmetic Expression-3:'),
+    writeln(ArithmeticExpr).
+
+test_arithmetic4 :-
+    phrase(expr(ArithmeticExpr), ['8', '/', '2']),
+    writeln('Arithmetic Expression-4:'),
+    writeln(ArithmeticExpr).
+
+test_arithmetic5 :-
+    phrase(expr(ArithmeticExpr), ['25', '%', '7']),
+    writeln('Arithmetic Expression-5:'),
+    writeln(ArithmeticExpr).
+
+% Boolean test cases
+test_boolean1 :-
+    phrase(bool_expr(BooleanExpr), ['Sahi', 'or', 'Galat']),
+    writeln('Boolean Expression-1:'),
+    writeln(BooleanExpr).
+
+test_boolean2 :-
+    phrase(bool_expr(BooleanExpr), ['not', 'Sahi', 'and', 'Galat']),
+    writeln('Boolean Expression-2:'),
+    writeln(BooleanExpr).
+
+test_boolean3 :-
+    phrase(bool_expr(BooleanExpr), ['10', '==', '5']),
+    writeln('Boolean Expression-3:'),
+    writeln(BooleanExpr).
+
+test_boolean4 :-
+    phrase(bool_expr(BooleanExpr), ['5', '>', '3']),
+    writeln('Boolean Expression-4:'),
+    writeln(BooleanExpr).
+
+test_boolean5 :-
+    phrase(bool_expr(BooleanExpr), ['x', '==', '10']),
+    writeln('Boolean Expression-5:'),
+    writeln(BooleanExpr).
+
+% Statement test cases
+test_statements1 :-
+    phrase(stmt_list(Statements), ['int', 'x', ';', 'display', 'x', ';']),
+    writeln('Statements-1:'),
+    writeln(Statements).
+
+test_statements2 :-
+    phrase(stmt_list(Statements), ['int', 'x', '=', '5', ';', 'int', 'y', '=', 'x', '+', '3', ';']),
+    writeln('Statements-2:'),
+    writeln(Statements).
+
+test_statements3 :-
+    phrase(stmt_list(Statements), ['x', '==', '5', '?', 'display', 'Sahi', ':', 'display', 'Galat', ';']),
+    writeln('Statements-3:'),
+    writeln(Statements).
+
+test_statements4 :-
+    phrase(stmt_list(Statements), ['for-loop', '(', 'int', 'i', '=', '0', ';', 'i', '<', '5', ';', 'i', '+=', '1', ')', '{', 'display', 'i', ';', '}']),
+    writeln('Statements-4:'),
+    writeln(Statements).
+
+test_statements5 :-
+    phrase(stmt_list(Statements), ['while', '(', 'x', '>', '0', ')', '{', 'display', 'x', ';', 'x', '-=', '1', ';', '}']),
+    writeln('Statements-5:'),
+    writeln(Statements).
+
+
+% Run all test cases
+run_tests :-
+    test_arithmetic1, test_arithmetic2, test_arithmetic3, test_arithmetic4, test_arithmetic5,
+    test_boolean1, test_boolean2, test_boolean3, test_boolean4, test_boolean5,
+    test_statements1, test_statements2, test_statements3, test_statements4, test_statements5.
