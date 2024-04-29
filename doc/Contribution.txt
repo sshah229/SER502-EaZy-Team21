@@ -3,7 +3,7 @@ Aum Garasia
   2. Worked on parsing and data structures that could be used.
   3. Added code to test the tokenizer and evaluator.
   4. Added code to read and return the number of nodes and leaves of the parse tree.
-  5. Added code to evaluate Arithmetic and boolean expressions, function parameters and arguements.
+  5. Added code to evaluate Arithmetic and boolean expressions, function parameters and arguments.
   6. Added boilerplate code to test the evaluator.
   7. Integrated all components.
 
@@ -17,9 +17,10 @@ Shubham Shah
   3. Created a test parser for the Tokenizer.
   4. Added the If-else, for loop, functions and program functionality.
   5. Added code to test the tokenizer and evaluator.
-  6. Added test cases for Arithmetic and boolean expressions, function parameters and arguements.
+  6. Added test cases for Arithmetic and boolean expressions, function parameters and arguments.
   7. Added boilerplate code to test the tokenizer.
 
 Siddesh Shetty
   1. Created the grammar for boolean and print statements.
   2. Worked on language design of the same and that of strings.
+  3. Implemented the design language for the tokenizer.
