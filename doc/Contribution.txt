@@ -10,6 +10,9 @@ Aum Garasia
 Samit Shah
   1. Created the grammar for conditionals and comments.
   2. Worked on language design of the same.
+  3. Defined predicates for parsing and evaluating expressions, boolean expressions, and statements in our custom programming language.
+  4. Defined keywords, special characters, and data types.
+  5. Included rules for arithmetic operations, boolean logic, variable declarations, assignment statements, and other language contraints as well in the parser.
 
 Shubham Shah
   1. Created the grammar for Loops and arithmetic expressions.
