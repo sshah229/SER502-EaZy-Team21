@@ -46,8 +46,8 @@ datatype('bool').
 
 
 
-boolean('Sahi').
-boolean('Galat').
+boolean('True').
+boolean('False').
 
 
 

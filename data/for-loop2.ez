@@ -1,0 +1,10 @@
+sup
+int x;
+int i;
+x = 12;
+for-loop (i in range(0,10))
+{
+    x += 1;
+}
+display x;
+peaceout

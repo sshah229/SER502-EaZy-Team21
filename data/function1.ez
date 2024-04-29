@@ -1,0 +1,8 @@
+func prod (int a, int b) {  int c; c = (a * b) % 10; return c;};
+sup
+@@ This is a Comment @@
+int z;
+z=4;
+int z = prod(z, 6);
+display z;
+peaceout

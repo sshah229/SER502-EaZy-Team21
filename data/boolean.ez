@@ -7,6 +7,6 @@ func evenOrOdd (int a) {
         }
     };
 sup
-int a=6;
+int a=89;
 evenOrOdd(a);
 peaceout

@@ -1,0 +1,8 @@
+func foo()
+{
+    display "hello world";
+}
+
+sup
+foo()
+peaceout

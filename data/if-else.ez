@@ -1,1 +1,11 @@
-
+sup
+bool a = True;
+if (a == True)
+{
+    display "Lesser";
+}
+else
+{
+    display "Greater";
+}
+peaceout
