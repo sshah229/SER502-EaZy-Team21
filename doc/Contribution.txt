@@ -15,7 +15,9 @@ Shubham Shah
   1. Created the grammar for Loops and arithmetic expressions.
   2. Worked on language design of the same.
   3. Created a test parser for the Tokenizer.
-  4. Added the If-else, for loop, functions and program functionality
+  4. Added the If-else, for loop, functions and program functionality.
+  5. Added code to test the tokenizer and evaluator.
+  6. Added test cases for Arithmetic and boolean expressions, function parameters and arguements.
 
 Siddesh Shetty
   1. Created the grammar for boolean and print statements.
