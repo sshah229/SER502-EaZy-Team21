@@ -18,6 +18,7 @@ Shubham Shah
   4. Added the If-else, for loop, functions and program functionality.
   5. Added code to test the tokenizer and evaluator.
   6. Added test cases for Arithmetic and boolean expressions, function parameters and arguements.
+  7. Added boilerplate code to test the tokenizer.
 
 Siddesh Shetty
   1. Created the grammar for boolean and print statements.
