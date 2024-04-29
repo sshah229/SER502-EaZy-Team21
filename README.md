@@ -9,7 +9,7 @@ It is no secret that python is one of the most popular programming languages out
 
 **Compiler / Interpreter runtime:** The runtime environment is also going to be implemented in python3. 
 
-**Data Structures:** We have implemented the environment using Dictionary data type and all the tokens are stored as elements in an array.
+**Data Structures:** We have implemented the environment using Dictionary data structure and all the tokens are stored as elements in an array.
 
 ## Team Members
 
